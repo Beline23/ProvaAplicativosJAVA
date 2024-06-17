@@ -1,0 +1,51 @@
+import javax.swing.JOptionPane;
+
+class Professor extends Escola {
+    private String nome;
+    private String[] disciplinas = new String[4];
+    private double[] notas = new double[4];
+
+    
+    public Professor(String nome) {
+        this.nome = nome;
+    }
+
+
+    public void inserirDisciplinaNota(int indice, String disciplina, double nota) {
+        if (indice >= 0 && indice < 4) {
+            disciplinas[indice] = disciplina;
+            notas[indice] = nota;
+        } else {
+            JOptionPane.showMessageDialog(null, "Índice inválido para disciplina.");
+        }
+    }
+
+  
+    public double calcularMedia() {
+        double soma = 0;
+        int disciplinasComNota = 0;
+        for (double nota : notas) {
+            if (nota != 0) {
+                soma += nota;
+                disciplinasComNota++;
+            }
+        }
+        if (disciplinasComNota > 0) {
+            return soma / disciplinasComNota;
+        } else {
+            return 0;
+        }
+    }
+
+ 
+    public void exibirInfo() {
+        StringBuilder info = new StringBuilder("Professor: " + nome + "\n");
+        for (int i = 0; i < 4; i++) {
+            if (disciplinas[i] != null) {
+                info.append("Disciplina: ").append(disciplinas[i]).append(" - Nota: ").append(notas[i]).append("\n");
+            }
+        }
+        info.append("Média das notas: ").append(calcularMedia());
+        JOptionPane.showMessageDialog(null, info.toString());
+    }
+}
